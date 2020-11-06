@@ -18,8 +18,6 @@ import userEdit from "./admin/userEdit";
 import AddMoreImages from "./admin/addMoreImages";
 import { signin, isAutheticated } from "./auth/helper";
 import Photos from "./user/Photos";
-import adminData from "./admin/adminData";
-import adminHistory from "./admin/adminHistory";
 // import { signup } from "../../controllers/auth";
 // import { signin } from "./auth/helper";
 const Routes = () => {
@@ -58,7 +56,7 @@ const Routes = () => {
         <Route path="/signUp" exact component={Signup} />
         <Route path="/signin" exact component={Signin} />
 
-        <Route path="/addcustomer" exact component={AWS} />
+        {/*<Route path="/addcustomer" exact component={AWS} />
 
         <PrivateRoute path="/user/dashboard" exact component={Dashboard} />
         <PrivateRoute path="/user" exact component={Dashboard} />
@@ -81,9 +79,7 @@ const Routes = () => {
           exact
           component={AddMoreImages}
         />
-        <AdminRoute path="/admin/addstock" exact component={AWS} />
-        <AdminRoute path="/admin/data" exact component={adminData} />
-        <AdminRoute path="/admin/history" exact component={adminHistory} />
+        <AdminRoute path="/admin/addstock" exact component={AWS} /> */}
       </Switch>
     </BrowserRouter>
   );
