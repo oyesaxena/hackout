@@ -324,13 +324,12 @@ app.post("/signUp", upload.array("imgCollection", 100), async (req, res) => {
 });
 
 app.post("/uploadGuideStock/:userId", async (req, res) => {
-  console.log(req.params.userId);
   await User.findOneAndUpdate(
     { _id: req.params.userId },
     {
-      touristRate: req.body.rate,
-      touristHour: req.body.hours,
-      touristLocation: req.body.place,
+      touristRate: req.body["rate"],
+      touristHour: req.body["hours"],
+      touristLocation: req.body["place"],
     },
     {
       new: true,

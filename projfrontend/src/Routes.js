@@ -76,7 +76,7 @@ const Routes = () => {
           component={SellerStock}
         />
         <PrivateRoute path="/user/guidepricing" exact component={GuideStock} />
-        <PrivateRoute path="/farmerImages/:userId" exact component={Photos} />
+        <PrivateRoute path="/sellerImages/:userId" exact component={Photos} />
         <PrivateRoute path="/user/history/" exact component={History} />
 
         <GuideRoute path="/guide/dashboard" exact component={GuideDashboard} />
