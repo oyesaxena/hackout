@@ -85,7 +85,7 @@ app.post("/addHistory/:userId", async (req, res) => {
     location: req.body.location,
     productName: req.body.productName,
     time: req.body.time,
-    price: req.body.profit,
+    price: req.body.price,
   });
   newHistory.save((err) => {
     if (err) {
@@ -105,7 +105,7 @@ app.post("/addHistory/:userId", async (req, res) => {
           location: req.body.location,
           productName: req.body.productName,
           time: req.body.time,
-          price: req.body.profit,
+          price: req.body.price,
         },
       },
     }
