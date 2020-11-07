@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import Base from "../core/Base";
-import ReactLoading from 'react-loading';
+import ReactLoading from "react-loading";
 import { Link } from "react-router-dom";
-import Menu from "../core/Menu";
 import axios from "axios";
-import { Button, Modal, ModalBody, Row, Col, Container } from "reactstrap";
 
 class AdminDashboard extends Component {
   state = {
@@ -66,30 +64,6 @@ class AdminDashboard extends Component {
       });
   };
 
-//   deleteUser(id) {
-//     this.setState(
-//       {
-//         id: id,
-//         status: "User Deleted",
-//         status2: "User deleted!!Please close the model",
-//       },
-//       () => {
-        
-//         console.log(this.state.id);
-//         axios
-//           .post("http://localhost:8000/deleteUser", { id: this.state.id })
-//           .then((res) => {
-//             this.getUsers()
-//             console.log(res.data);
-//             this.setState({ loading: false });
-//             this.setState({
-//               users: this.state.users.filter((el) => el._id !== id),
-//             });
-//           });
-//       }
-//     );
-//   }
-
   displayUsers = (users) => {
     let filterUsers = users.filter((user) => {
       return user.name.toLowerCase().indexOf(this.state.search) !== -1;
@@ -107,65 +81,6 @@ class AdminDashboard extends Component {
             Stock and Prices
           </Link>
         </th>
-        {/* <th scope="col">
-          <Link to={"/userAddImages/" + user._id} className="text-warning">
-            Add more images
-          </Link>
-        </th> */}
-        {/* <th>
-          <Link
-            onClick={() => {
-              this.toggle(user._id);
-            }}
-            className="fas fa-trash text-warning"
-          ></Link>
-        </th> */}
-        {/* <th>
-          <Link
-            to={"/userEdit/" + user._id}
-            className="fas fa-user-edit text-warning"
-          ></Link>
-        </th> */}
-        {/* <Modal
-          isOpen={this.state.selectedPost === user._id}
-          className="mt-2"
-          style={{}}
-        >
-          <div className="modal-header bg-warning">
-            <h3 className="modal-title" id="exampleModalLabel">
-              Are you sure?
-            </h3>
-            <button
-              type="button"
-              className="close"
-              onClick={() => this.closeIt()}
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-          <ModalBody>
-            <Container className="text-center pt-3">
-              <Button
-                style={{ margin: "20px" }}
-                onClick={() => this.deleteUser(user._id)}
-                className="bg-warning text-light"
-              >
-                {this.state.status}
-              </Button>
-              <Button
-                style={{ margin: "20px" }}
-                onClick={() => this.closeIt()}
-                className="bg-warning text-light"
-              >
-                No
-              </Button>
-            </Container>
-            <p>{this.state.status2}</p>
-          </ModalBody>
-        </Modal> */}
       </tr>
     ));
   };
@@ -173,10 +88,19 @@ class AdminDashboard extends Component {
   render() {
     const { loading, users } = this.state;
     if (loading) {
-      return <div style={{marginLeft:"30%",marginRight:"auto",marginTop:"20%",width:"100%"}}> 
-      <h2>Loading!! Please wait...</h2>
-      <ReactLoading type={"bars"}  color={"#ffff00"} />
-    </div>
+      return (
+        <div
+          style={{
+            marginLeft: "30%",
+            marginRight: "auto",
+            marginTop: "20%",
+            width: "100%",
+          }}
+        >
+          <h2>Loading!! Please wait...</h2>
+          <ReactLoading type={"bars"} color={"#ffff00"} />
+        </div>
+      );
     }
     console.log(this.state.users);
     return (
