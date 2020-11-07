@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const User = require("./models/user");
+const History = require("./models/historyDB");
 const mongoose = require("mongoose");
 
 const express = require("express");
@@ -77,6 +78,42 @@ app.get("/userImages/:userId", async (req, res) => {
     .catch((err) => res.status(400).json("Error" + err));
 });
 
+app.post("/addHistory/:userId", async (req, res) => {
+  const newHistory = new History({
+    name: req.body.name,
+    status: req.body.status,
+    location: req.body.location,
+    productName: req.body.productName,
+    time: req.body.time,
+    price: req.body.profit,
+  });
+  newHistory.save((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("history added");
+      res.send("Registered");
+    }
+  });
+  await User.findOneAndUpdate(
+    { _id: req.params.userId },
+    {
+      $push: {
+        history: {
+          name: req.body.name,
+          status: req.body.status,
+          location: req.body.location,
+          productName: req.body.productName,
+          time: req.body.time,
+          price: req.body.profit,
+        },
+      },
+    }
+  )
+    .then(() => console.log("history updated"))
+    .catch((err) => console.location(err));
+});
+
 app.post("/userImages/:userId", async (req, res) => {
   console.log(req.body.offset);
   const initial = req.body.offset;
@@ -141,6 +178,13 @@ app.get("/getUsers", async (req, res) => {
     .catch((error) => {
       console.log("error: ", daerrorta);
     });
+});
+
+app.get("/getHistory/:userId", async (req, res) => {
+  await User.findOne({ _id: req.params.userId }, { images: 0 })
+
+    .then((data) => res.json(data))
+    .catch((err) => console.log("error: ", daerrorta));
 });
 
 app.get("/getAdmins", async (req, res) => {
@@ -215,6 +259,12 @@ app.get("/selectedSellerImages/:userId", async (req, res) => {
     .catch((err) => res.status(400).json("Error" + err));
 });
 
+app.get("/getHistory/:userId", async (req, res) => {
+  await User.findOne({ _id: req.params.userId }, { images: 0 })
+
+    .then((user) => res.json(user))
+    .catch((err) => res.json(400).json("ERROR" + err));
+});
 app.get("/selectedImagesTourists/:userId", async (req, res) => {
   await User.findOne(
     { _id: req.params.userId },
@@ -324,13 +374,12 @@ app.post("/signUp", upload.array("imgCollection", 100), async (req, res) => {
 });
 
 app.post("/uploadGuideStock/:userId", async (req, res) => {
-  console.log(req.params.userId);
   await User.findOneAndUpdate(
     { _id: req.params.userId },
     {
-      touristRate: req.body.rate,
-      touristHour: req.body.hours,
-      touristLocation: req.body.place,
+      touristRate: req.body["rate"],
+      touristHour: req.body["hours"],
+      touristLocation: req.body["place"],
     },
     {
       new: true,

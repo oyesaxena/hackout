@@ -15,8 +15,8 @@ function SellerStock() {
     e.preventDefault();
 
     const placeData = new FormData();
-    placeData.append("place", location);
-    placeData.append("hours", hours);
+    placeData.append("place", quality);
+    placeData.append("hours", type);
 
     setLoadMessage("Getting Expected Price...");
 
@@ -36,22 +36,19 @@ function SellerStock() {
 
   function onSubmit(e) {
     e.preventDefault();
-    console.log(location);
-    console.log(hours);
-    const finalFormData = new FormData();
+
+    const data = {
+      place: quality,
+      hours: type,
+      rate: customRate,
+    };
+
     setLoadMessage("Registering Product...");
 
-    finalFormData.append("place", quality);
-    finalFormData.append("hours", type);
-    finalFormData.append("rate", customRate);
-
     const userData = JSON.parse(localStorage.jwt);
+
     axios
-      .post(
-        "http://localhost:8000/uploadGuideStock/" + userData.user._id,
-        finalFormData,
-        {}
-      )
+      .post("http://localhost:8000/uploadGuideStock/" + userData.user._id, data)
       .then(() => {
         setLoadMessage(null);
       })
