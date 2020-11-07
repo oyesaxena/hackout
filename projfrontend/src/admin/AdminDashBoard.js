@@ -98,7 +98,6 @@ class AdminDashboard extends Component {
       <tr key={index}>
         <th scope="col">{index + 1}</th>
         <th scope="col">{user.name}</th>
-        <th scope="col">{user.title}</th>
         <th scope="col">{user.status}</th>
         <th scope="col">{user.updatedAt.slice(0, 10)}</th>
         <th scope="col">
@@ -216,10 +215,11 @@ class AdminDashboard extends Component {
                 <tr>
                   <th scope="col">S.No</th>
                   <th scope="col">Username</th>
-                  <th scope="col">Title</th>
                   <th scope="col">Status</th>
                   <th scope="col">Date</th>
                   <th scope="col">Notes</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
               {this.displayUsers(this.state.users)}

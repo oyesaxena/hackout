@@ -53,6 +53,9 @@ function SellerStock() {
         {}
       )
       .then(() => {
+        setLoadMessage(null);
+      })
+      .then(() => {
         window.location.reload(false);
       });
   }

@@ -1,0 +1,17 @@
+table {
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+
+th {
+  background-color: #c4ffc2;
+}
+
+thead tr th {
+  background-color: #a2f69f;
+}
+
+tr {
+  height: 50px;
+  box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.4);
+}

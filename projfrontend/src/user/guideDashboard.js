@@ -66,29 +66,6 @@ class AdminDashboard extends Component {
       });
   };
 
-  // deleteUser(id) {
-  //   this.setState(
-  //     {
-  //       id: id,
-  //       status: "User Deleted",
-  //       status2: "User deleted!!Please close the model",
-  //     },
-  //     () => {
-  //       console.log(this.state.id);
-  //       axios
-  //         .post("http://localhost:8000/deleteUser", { id: this.state.id })
-  //         .then((res) => {
-  //           this.getUsers();
-  //           console.log(res.data);
-  //           this.setState({ loading: false });
-  //           this.setState({
-  //             users: this.state.users.filter((el) => el._id !== id),
-  //           });
-  //         });
-  //     }
-  //   );
-  // }
-
   displayUsers = (users) => {
     let filterUsers = users.filter((user) => {
       return user.name.toLowerCase().indexOf(this.state.search) !== -1;
@@ -109,11 +86,6 @@ class AdminDashboard extends Component {
             Selected Places
           </Link>
         </th>
-        {/* <th scope="col">
-          <Link to={"/userAddImages/" + user._id} className="text-warning">
-            Add more images
-          </Link>
-        </th> */}
         <th>
           <Link
             onClick={() => {
@@ -220,6 +192,8 @@ class AdminDashboard extends Component {
                   <th scope="col">Status</th>
                   <th scope="col">Date</th>
                   <th scope="col">Notes</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
               {this.displayUsers(this.state.users)}
