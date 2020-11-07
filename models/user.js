@@ -44,6 +44,9 @@ var userSchema = new Schema(
     rates: [],
     productNames: [],
     locations: [],
+    selectedGuides: [
+      { name: String, time: String, price: String, location: String },
+    ],
     selectedSellerRates: [],
     selectedProductNames: [],
     history: [

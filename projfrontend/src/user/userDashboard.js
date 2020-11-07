@@ -7,6 +7,10 @@ import axios from "axios";
 class AdminDashboard extends Component {
   state = {
     users: [],
+    name: "",
+    hour: "",
+    location: "",
+    rate: "",
     loading: true,
     id: "",
     selectedImage: "",
@@ -27,6 +31,24 @@ class AdminDashboard extends Component {
     });
   };
 
+  bookGuide = (name, hour, location, rate) => {
+    const userData = JSON.parse(localStorage.jwt);
+    this.setState(
+      { name: name, hour: hour, location: location, rate: rate },
+      () => {
+        axios
+          .post("http://localhost:8000/bookGuide/" + userData.user._id, {
+            name: this.state.name,
+            hour: this.state.hour,
+            location: this.state.location,
+            rate: this.state.rate,
+          })
+          .then((res) => {
+            console.log(res.data);
+          });
+      }
+    );
+  };
   updateSearch(e) {
     this.setState({ search: e.target.value.substr(0, 20) }, () => {
       console.log(this.state.search);
@@ -73,8 +95,9 @@ class AdminDashboard extends Component {
       <tr key={index}>
         <th scope="col">{index + 1}</th>
         <th scope="col">{user.name}</th>
-        <th scope="col">{user.status}</th>
-        <th scope="col">{user.Location}</th>
+        <th scope="col">{user.touristLocation}</th>
+        <th scope="col">{user.touristRate}</th>
+        <th scope="col">{user.touristHour}</th>
         <th scope="col">{user.updatedAt.slice(0, 10)}</th>
         <th scope="col">
           <Link
@@ -84,6 +107,21 @@ class AdminDashboard extends Component {
             className="text-warning"
           >
             Stock and Prices
+          </Link>
+        </th>
+        <th scope="col">
+          <Link
+            onClick={() => {
+              this.bookGuide(
+                user.name,
+                user.touristHour,
+                user.touristLocation,
+                user.touristRate
+              );
+            }}
+            className="text-warning"
+          >
+            Book Guide
           </Link>
         </th>
       </tr>
@@ -136,7 +174,8 @@ class AdminDashboard extends Component {
                   <th scope="col">Username</th>
                   <th scope="col">Status</th>
                   <th scope="col">Location</th>
-                  <th scope="col">Date</th>
+                  <th scope="col">Rate</th>
+                  <th scope="col">Time</th>
                   <th scope="col">Notes</th>
                 </tr>
               </thead>
