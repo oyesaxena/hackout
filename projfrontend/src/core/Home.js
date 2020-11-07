@@ -18,8 +18,12 @@ export default function Home() {
           </p>
           <img src={WelcomeImage} alt="" className="welcome-image" />
           <div className="welcome-button-container">
-            <Link className="login-button">LOGIN</Link>
-            <Link className="registration-button">REGISTRATION</Link>
+            <Link to={"/signin"} className="login-button">
+              LOGIN
+            </Link>
+            <Link to={"/signup"} className="registration-button">
+              REGISTRATION
+            </Link>
           </div>
         </div>
       </section>

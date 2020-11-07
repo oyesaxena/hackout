@@ -48,39 +48,39 @@ const Signin = () => {
 
   const signInForm = () => {
     return (
-      <Base className="text-dark block-container">
-        <section className="land-section">
-          <div className="hero">
-            <div className="hero-login-form">
-              <h1>Login To CrossFarm</h1>
-              <div className="login-form-container">
-                <img
-                  className="login-form-image"
-                  src={loginWelcomeImage}
-                  alt=""
-                />
-                <div className="form-right">
-                  <div className="form-container">
-                    <form>
-                      <input
-                        type="email"
-                        onChange={handleChange("email")}
-                        name="loginID"
-                        placeholder="Email"
-                        value={email}
-                      />
-                      <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={handleChange("password")}
-                      />
-                      <button onClick={onSubmit}>LOGIN</button>
-                    </form>
-                  </div>
-                  <button className="register-button">REGISTER</button>
+      <Base>
+        <section className="landing-section">
+          <div className="welcome-board">
+            <h1>Login To CrossFarm</h1>
+            <div className="login-form-container">
+              <img
+                className="login-form-image"
+                src={loginWelcomeImage}
+                alt=""
+              />
+              <div className="form-right">
+                <div className="form-container">
+                  <form>
+                    <input
+                      type="email"
+                      onChange={handleChange("email")}
+                      name="loginID"
+                      placeholder="Email"
+                      value={email}
+                    />
+                    <input
+                      type="password"
+                      name="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={handleChange("password")}
+                    />
+                    <button onClick={onSubmit}>LOGIN</button>
+                  </form>
                 </div>
+                <Link to={"/signup"} className="registration-button">
+                  REGISTER
+                </Link>
               </div>
             </div>
           </div>
@@ -112,7 +112,7 @@ const Signin = () => {
     );
   };
   return (
-    <div className="container">
+    <div>
       {loadingMessage()}
       {errorMessage()}
       {signInForm()}

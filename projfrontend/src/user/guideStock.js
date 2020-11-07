@@ -106,7 +106,12 @@ function SellerStock() {
             </div>
             <div className="form-group">
               <label className="">Rate</label>
-              <input type="text" className="form-control" value={rate} />
+              <input
+                type="text"
+                className="form-control"
+                value={rate}
+                readOnly
+              />
             </div>
             <button type="submit" className="btn btn-warning btn-block">
               Submit

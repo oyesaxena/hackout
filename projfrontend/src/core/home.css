@@ -29,13 +29,26 @@
   justify-content: space-evenly;
 }
 
-.welcome-button-container button {
+.welcome-button-container a {
   outline: none;
   border-style: none;
 
   width: 40%;
   height: 60px;
   border-radius: 30px;
+  line-height: 60px;
 
   box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.registration-button {
+  background-color: #a2f69f;
+}
+
+.welcome-button-container a {
+  color: grey;
+}
+
+.welcome-button-container a:hover {
+  text-decoration: none;
 }
