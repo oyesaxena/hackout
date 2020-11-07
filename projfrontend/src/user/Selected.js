@@ -12,6 +12,8 @@ class Selected extends Component {
     loading: true,
     selectedImage: "",
     selectedPost: null,
+    rate: "",
+    productName: "",
     status: "Remove from wishlist",
     status2: "",
     modal: false,
@@ -98,30 +100,35 @@ class Selected extends Component {
       });
   };
 
-  select = (image) => {
+  select = (image, name, rate) => {
     console.log("clicked");
     console.log(image);
     this.setState({
       status: "Removed",
       status2: "Image is removed!!",
     });
-    this.setState({ selectedImage: image }, () => {
-      console.log("selected Image--", this.state.selectedImage);
-      const userData = JSON.parse(localStorage.jwt);
+    this.setState(
+      { selectedImage: image, productName: name, rate: rate },
+      () => {
+        console.log("selected Image--", this.state.selectedImage);
+        const userData = JSON.parse(localStorage.jwt);
 
-      axios
-        .post(
-          "http://localhost:8000/removeSelectedSellerImage/" +
-            userData.user._id,
-          {
-            selectedImage: this.state.selectedImage,
-            userId: userData.user._id,
-          }
-        )
-        .then((res) => {
-          console.log(res.data);
-        });
-    });
+        axios
+          .post(
+            "http://localhost:8000/removeSelectedSellerImage/" +
+              userData.user._id,
+            {
+              selectedImage: this.state.selectedImage,
+              productName: this.state.productName,
+              rate: this.state.rate,
+              userId: userData.user._id,
+            }
+          )
+          .then((res) => {
+            console.log(res.data);
+          });
+      }
+    );
   };
 
   renderModal = () => {
@@ -154,7 +161,11 @@ class Selected extends Component {
 
   displayImages = (imageData) => {
     const { selectedPost } = this.state;
-    const { selectedSellerImages = [] } = imageData;
+    const {
+      selectedSellerImages = [],
+      selectedSellerRates = [],
+      selectedProductNames = [],
+    } = imageData;
     const currentPosts = selectedSellerImages.slice(
       this.state.offset,
       this.state.offset + this.state.postsPerPage
@@ -178,6 +189,20 @@ class Selected extends Component {
             borderStyle: "solid",
           }}
         />
+        <table className="table table-borderless">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Rate/kg</th>
+              {/* <th scope="col">Quality</th> */}
+            </tr>
+          </thead>
+          <tr>
+            <th scope="col">{selectedProductNames[index]}</th>
+            <th scope="col">{selectedSellerRates[index]}</th>
+            {/* <th scope="col">{locations[index]}</th> */}
+          </tr>
+        </table>
         {/* <Button id={image.location} style={{alignContent:"center",marginLeft:"100px",marginTop:"20px",marginBottom:"10px"}} value={image.location} onClick={this.select} className="bg-warning text-dark">{this.state.status}</Button> */}
 
         <Modal
@@ -226,7 +251,13 @@ class Selected extends Component {
 
             <Container className="text-center pt-3">
               <Button
-                onClick={() => this.select(image)}
+                onClick={() =>
+                  this.select(
+                    image,
+                    selectedProductNames[index],
+                    selectedSellerRates[index]
+                  )
+                }
                 className="bg-warning text-light"
               >
                 {this.state.status}

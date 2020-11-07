@@ -11,6 +11,8 @@ class Photos extends Component {
   state = {
     images: [],
     bool: [],
+    rate: "",
+    name: "",
     loading: true,
     selectedImage: "",
     selectedTitle: "",
@@ -109,28 +111,36 @@ class Photos extends Component {
       });
   };
 
-  select = (image) => {
+  select = (image, productName, rate) => {
     console.log("clicked");
-
+    console.log(productName, rate);
     this.setState({
       status: "Selected",
       status2: "You can view this photo in SELECTED PHOTOS",
     });
 
-    this.setState({ selectedImage: image }, () => {
-      console.log("selected Image--", this.state.selectedImage);
-      const userData = JSON.parse(localStorage.jwt);
+    this.setState(
+      { selectedImage: image, name: productName, rate: rate },
+      () => {
+        console.log("selected Image--", this.state.selectedImage);
+        const userData = JSON.parse(localStorage.jwt);
 
-      axios
-        .post("http://localhost:8000/selectSellerImage/" + userData.user._id, {
-          selectedImage: this.state.selectedImage,
-          userId: userData.user._id,
-        })
-        .then((res) => {
-          console.log(res.data);
-          this.setState({ loading: false });
-        });
-    });
+        axios
+          .post(
+            "http://localhost:8000/selectSellerImage/" + userData.user._id,
+            {
+              selectedImage: this.state.selectedImage,
+              productName: this.state.name,
+              rate: this.state.rate,
+              userId: userData.user._id,
+            }
+          )
+          .then((res) => {
+            console.log(res.data);
+            this.setState({ loading: false });
+          });
+      }
+    );
   };
 
   renderModal = () => {
@@ -283,7 +293,9 @@ class Photos extends Component {
 
             <Container className="text-center pt-3">
               <Button
-                onClick={() => this.select(image)}
+                onClick={() =>
+                  this.select(image, productNames[index], rates[index])
+                }
                 className="bg-warning text-light"
               >
                 {this.state.status}

@@ -138,7 +138,11 @@ class Selected extends Component {
 
   displayImages = (imageData) => {
     const { selectedPost } = this.state;
-    const { selectedSellerImages = [] } = imageData;
+    const {
+      selectedSellerImages = [],
+      selectedSellerRates = [],
+      selectedProductNames = [],
+    } = imageData;
     const currentPosts = selectedSellerImages.slice(
       this.state.offset,
       this.state.offset + this.state.postsPerPage
@@ -162,6 +166,20 @@ class Selected extends Component {
             borderStyle: "solid",
           }}
         />
+        <table className="table table-borderless">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Rate</th>
+              {/* <th scope="col">Quality</th> */}
+            </tr>
+          </thead>
+          <tr>
+            <th scope="col">{selectedProductNames[index]}</th>
+            <th scope="col">{selectedSellerRates[index]}</th>
+            {/* <th scope="col">{locations[index]}</th> */}
+          </tr>
+        </table>
       </div>
     ));
   };

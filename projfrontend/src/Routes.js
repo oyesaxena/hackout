@@ -67,9 +67,8 @@ const Routes = () => {
         <Route path="/signin" exact component={Signin} />
 
         {/* <Route path="/test" exact component={SellerStock} /> */}
-
         <GuideRoute path="/guide/dashboard" exact component={GuideDashboard} />
-
+        <GuideRoute path="/guide/editPlaces" exact component={GuideStock} />
         <PrivateRoute path="/user/dashboard" exact component={Dashboard} />
         <PrivateRoute path="/user" exact component={Dashboard} />
         <PrivateRoute path="/user/images" exact component={UserDashBoard} />
