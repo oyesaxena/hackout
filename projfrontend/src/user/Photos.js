@@ -234,8 +234,8 @@ class Photos extends Component {
           <thead>
             <tr>
               <th scope="col">Name</th>
-              <th scope="col">Rate/kg</th>
-              <th scope="col">Quality</th>
+              <th scope="col">Rate</th>
+              <th scope="col">Location</th>
             </tr>
           </thead>
           <tr>

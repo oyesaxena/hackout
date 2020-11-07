@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { isAutheticated } from "../auth/helper";
 import Base from "./Base";
 import "./history.css";
-
+import axios from "axios";
 function History() {
   const [name, setName] = useState("");
   const [userType, setUserType] = useState("0");
@@ -26,6 +26,21 @@ function History() {
       },
     ]);
 
+    const userData = JSON.parse(localStorage.jwt);
+
+    axios
+      .post("http://localhost:8000/addHistory/" + userData.user._id, {
+        name: name,
+        status: userType,
+        location: location,
+        time: hours,
+        productName: productName,
+        price: profit,
+      })
+      .then(() => {
+        window.location.reload(false);
+      });
+
     setName("");
     setUserType("0");
     setProductName("");
@@ -34,8 +49,27 @@ function History() {
     setProfit("");
   }
 
-  function displayUsers(filterUsers) {
-    return filterUsers.map((user, index) => (
+  function getUsers() {
+    const userData = JSON.parse(localStorage.jwt);
+
+    axios
+      .get("http://localhost:8000/getHistory/" + userData.user._id)
+      .then((response) => {
+        console.log(response.data);
+        const data = response.data;
+        this.setState({ users: data, loading: false });
+        console.log(this.state.users);
+        console.log("Data has been received!!");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Error retrieving data!!!");
+        this.setState({ loading: false });
+      });
+  }
+
+  function displayUsers(users) {
+    return users.map((user, index) => (
       <tr key={index}>
         <th scope="col">{index + 1}</th>
         <th scope="col">{user.name}</th>

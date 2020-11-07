@@ -46,6 +46,16 @@ var userSchema = new Schema(
     locations: [],
     selectedSellerRates: [],
     selectedProductNames: [],
+    history: [
+      {
+        name: String,
+        status: String,
+        location: String,
+        productName: String,
+        time: String,
+        price: String,
+      },
+    ],
     touristHour: { type: String },
     touristRate: { type: String },
     touristLocation: { type: String },
