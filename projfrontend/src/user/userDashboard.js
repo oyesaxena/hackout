@@ -96,8 +96,9 @@ class AdminDashboard extends Component {
         <th scope="col">{index + 1}</th>
         <th scope="col">{user.name}</th>
         <th scope="col">{user.touristLocation}</th>
-        <th scope="col">{user.touristRate}</th>
+        {/* <th scope="col">{user.touristRate}</th> */}
         <th scope="col">{user.touristHour}</th>
+        <th scope="col">{user.status}</th>
         <th scope="col">{user.updatedAt.slice(0, 10)}</th>
         <th scope="col">
           <Link
