@@ -58,6 +58,7 @@ function SellerStock() {
       )
       .then(() => {
         window.location.reload(false);
+        setLoadMessage(null);
       });
   }
 
@@ -81,7 +82,7 @@ function SellerStock() {
             <div className="form-group">
               <label className="">Upload Photos</label>
               <br></br>
-              {/* <div className="input-group">
+              <div className="input-group">
                 <div>
                   <input
                     style={{ borderColor: "#0000ff", borderBlock: "solid" }}
@@ -91,7 +92,7 @@ function SellerStock() {
                     onChange={onFileChange}
                   />
                 </div>
-  </div> */}
+              </div>
             </div>
             <button onClick={getEstimatedPrice}>Check</button>
             <div className="form-group">

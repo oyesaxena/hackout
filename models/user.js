@@ -48,7 +48,7 @@ var userSchema = new Schema(
     identity: [],
     imagesCount: { type: Number, default: 0 },
     selectedPlaces: [],
-    selectedImagesSellers: [],
+    selectedSellerImages: [],
     selectedImagesCountTourists: { type: Number, default: 0 },
     selectedImagesCountSellers: { type: Number, default: 0 },
     videos: [],

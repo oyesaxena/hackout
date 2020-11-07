@@ -58,8 +58,8 @@ const Menu = ({ history }) => {
               <NavLink
                 activeClassName="nav-link-active"
                 className="nav-link"
-                to="/admin/dashboard"
-                style={currentTab(history, "/admin/dashboard")}
+                to="/seller/dashboard"
+                style={currentTab(history, "/seller/dashboard")}
               >
                 <span className="text-light" style={{ fontSize: "18px" }}>
                   ADMIN DASHBOARD
@@ -130,7 +130,7 @@ const Menu = ({ history }) => {
               <NavLink
                 activeClassName="nav-link-active"
                 className="nav-link"
-                to="/admin/addstock"
+                to="/seller/addstock"
                 style={currentTab(history, "/admin/addstock")}
               >
                 <span className="text-light" style={{ fontSize: "18px" }}>

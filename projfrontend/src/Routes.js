@@ -66,7 +66,7 @@ const Routes = () => {
         <Route path="/signUp" exact component={Signup} />
         <Route path="/signin" exact component={Signin} />
 
-        <Route path="/test" exact component={SellerStock} />
+        {/* <Route path="/test" exact component={SellerStock} /> */}
 
         <GuideRoute path="/guide/dashboard" exact component={GuideDashboard} />
 
@@ -83,7 +83,7 @@ const Routes = () => {
         />
         {/* <GuideRoute path="/guide/dashboard" exact component={AdminDashBoard} /> */}
         <SellerRoute
-          path="/userSelectedImages/:userId"
+          path="/userSelectedSellerImages/:userId"
           exact
           component={UserSelectedImages}
         />
@@ -92,13 +92,14 @@ const Routes = () => {
           exact
           component={UserSelectedImagesTourists}
         />
-        <Route path="/farmerImages/:userId" exact component={Photos} />
+        <Route path="/sellerImages/:userId" exact component={Photos} />
         <SellerRoute path="/userEdit/:userId" exact component={userEdit} />
         <SellerRoute
           path="/userAddImages/:userId"
           exact
           component={AddMoreImages}
         />
+        <SellerRoute path="/seller/addStock" exact component={SellerStock} />
       </Switch>
     </BrowserRouter>
   );

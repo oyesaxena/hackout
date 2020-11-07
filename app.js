@@ -153,15 +153,12 @@ app.get("/getAdmins", async (req, res) => {
     });
 });
 
-app.post("/removeSelectedImage/:userId", async (req, res) => {
+app.post("/removeSelectedSellerImage/:userId", async (req, res) => {
   await User.findOneAndUpdate(
     { _id: req.body.userId },
     {
       $pull: {
-        selectedImages: req.body.selectedImage,
-      },
-      $inc: {
-        selectedImagesCount: -1,
+        selectedSellerImages: req.body.selectedImage,
       },
     }
   )
@@ -207,10 +204,10 @@ app.post("/deleteUser", async (req, res) => {
     });
 });
 
-app.get("/selectedImages/:userId", async (req, res) => {
+app.get("/selectedSellerImages/:userId", async (req, res) => {
   await User.findOne(
     { _id: req.params.userId },
-    { images: 0, videos: 0, selectedImagesSellers: { $slice: [0, 8] } }
+    { images: 0, videos: 0, selectedSellerImages: { $slice: [0, 8] } }
   )
     .then((user) => res.json(user))
     .catch((err) => res.status(400).json("Error" + err));
@@ -235,12 +232,12 @@ app.post("/selectedImages/:userId", async (req, res) => {
     .catch((err) => res.status(400).json("Error" + err));
 });
 
-app.post("/selectImage/:userId", async (req, res) => {
+app.post("/selectSellerImage/:userId", async (req, res) => {
   await User.findOneAndUpdate(
     { _id: req.body.userId },
     {
       $push: {
-        selectedImages: req.body.selectedImage,
+        selectedSellerImages: req.body.selectedImage,
       },
       $inc: {
         selectedImagesCount: 1,
@@ -365,7 +362,7 @@ app.post(
       { _id: req.params.userId },
       {
         $push: {
-          images: reqFiles,
+          selectedImagesSellers: reqFiles,
           rates: req.body.rate,
           productNames: req.body.productName,
           locations: req.body.location,

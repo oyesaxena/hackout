@@ -66,7 +66,7 @@ class AdminDashboard extends Component {
 
   displayUsers = (users) => {
     let filterUsers = users.filter((user) => {
-      return user.name.toLowerCase().indexOf(this.state.search) !== -1;
+      return user.status.toLowerCase().indexOf(this.state.search) !== -1;
     });
 
     return filterUsers.map((user, index) => (
@@ -79,7 +79,7 @@ class AdminDashboard extends Component {
         <th scope="col">
           <Link
             to={
-              (user.role === 1 ? "/farmerImages/" : "/guideStock/") + user._id
+              (user.role === 1 ? "/sellerImages/" : "/guideStock/") + user._id
             }
             className="text-warning"
           >
