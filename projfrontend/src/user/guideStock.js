@@ -5,8 +5,8 @@ import axios from "axios";
 import { isAutheticated } from "../auth/helper";
 
 function SellerStock() {
-  const [hours, setTime] = useState("");
-  const [location, setLocation] = useState("");
+  const [type, setType] = useState("");
+  const [quality, setQuality] = useState("");
   const [expectedRate, setExpectedRate] = useState("");
   const [customRate, setCustomRate] = useState("");
   const [loadMessage, setLoadMessage] = useState(null);
@@ -41,10 +41,10 @@ function SellerStock() {
     const finalFormData = new FormData();
     setLoadMessage("Registering Product...");
 
-    finalFormData.append("place", location);
-    finalFormData.append("hours", hours);
+    finalFormData.append("place", quality);
+    finalFormData.append("hours", type);
     finalFormData.append("rate", customRate);
-    console.log(finalFormData);
+
     const userData = JSON.parse(localStorage.jwt);
     axios
       .post(
@@ -73,15 +73,13 @@ function SellerStock() {
     <Base>
       <div className="row">
         <div className="col-md-6 offset-sm-3 text-left">
-          <form>
+          <form onSubmit={onSubmit}>
             <div className="form-group">
-              <label for="type" className="">
-                Hours
-              </label>
+              <label className="">Hours</label>
               <input
                 type="text"
-                value={hours}
-                onChange={(e) => setTime(e.target.value)}
+                value={type}
+                onChange={(e) => setType(e.target.value)}
                 className="form-control"
               ></input>
             </div>
@@ -90,8 +88,9 @@ function SellerStock() {
               <select
                 name="type"
                 id="type"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                value={quality}
+                onChange={(e) => setQuality(e.target.value)}
+                className="form-control"
               >
                 <option value="">Select an Option</option>
                 <option value="Agra">Agra</option>
@@ -128,13 +127,11 @@ function SellerStock() {
                 />
               </div>
             )}
-            <button
-              type="submit"
-              onClick={onSubmit}
-              className="btn btn-warning btn-block"
-            >
-              Submit
-            </button>
+            {isAutheticated().user.role === 2 && (
+              <button type="submit" className="btn btn-warning btn-block">
+                Submit
+              </button>
+            )}
           </form>
         </div>
       </div>

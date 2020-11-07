@@ -20,7 +20,7 @@ const Menu = ({ history }) => {
       <nav className="nav bg-dark">
         <span id="brand">
           <Link className="nav-link" to="/" style={currentTab(history, "/")}>
-            <span className="text-light">CROSSFARM</span>
+            <span className="text-light">AroundMe</span>
           </Link>
         </span>
 
@@ -34,35 +34,7 @@ const Menu = ({ history }) => {
                 style={currentTab(history, "/user/dashboard")}
               >
                 <span className="text-light" style={{ fontSize: "18px" }}>
-                  PHOTOS
-                </span>
-              </NavLink>
-            </li>
-          )}
-          {isAutheticated().user.role === 0 && (
-            <li className="nav-item">
-              <NavLink
-                activeClassName="nav-link-active"
-                className="nav-link"
-                to="/userdata"
-                style={currentTab(history, "/userdata")}
-              >
-                <span className="text-light" style={{ fontSize: "18px" }}>
-                  DATA
-                </span>
-              </NavLink>
-            </li>
-          )}
-          {isAutheticated().user.role === 1 && (
-            <li className="nav-item">
-              <NavLink
-                activeClassName="nav-link-active"
-                className="nav-link"
-                to="/seller/dashboard"
-                style={currentTab(history, "/seller/dashboard")}
-              >
-                <span className="text-light" style={{ fontSize: "18px" }}>
-                  ADMIN DASHBOARD
+                  DASHBOARD
                 </span>
               </NavLink>
             </li>
@@ -81,22 +53,49 @@ const Menu = ({ history }) => {
               </NavLink>
             </li>
           )}
-
           {isAutheticated().user.role === 0 && (
             <li className="nav-item">
               <NavLink
                 activeClassName="nav-link-active"
                 className="nav-link"
-                to="/user/video"
-                style={currentTab(history, "/user/video")}
+                to="/user/sellerpricing"
+                style={currentTab(history, "/user/sellerpricing")}
               >
                 <span className="text-light" style={{ fontSize: "18px" }}>
-                  SAMPLE VIDEOS
+                  SELLER PRICING
+                </span>
+              </NavLink>
+            </li>
+          )}
+          {isAutheticated().user.role === 0 && (
+            <li className="nav-item">
+              <NavLink
+                activeClassName="nav-link-active"
+                className="nav-link"
+                to="/user/guidepricing"
+                style={currentTab(history, "/guidepricing")}
+              >
+                <span className="text-light" style={{ fontSize: "18px" }}>
+                  GUIDE PRICING
                 </span>
               </NavLink>
             </li>
           )}
           {/* CHANGE COMPONENT TO DATA COMPONENT */}
+          {isAutheticated().user.role === 1 && (
+            <li className="nav-item">
+              <NavLink
+                activeClassName="nav-link-active"
+                className="nav-link"
+                to="/admin/dashboard"
+                style={currentTab(history, "/admin/dashboard")}
+              >
+                <span className="text-light" style={{ fontSize: "18px" }}>
+                  ADMIN DASHBOARD
+                </span>
+              </NavLink>
+            </li>
+          )}
           {isAutheticated().user.role === 1 && (
             <li className="nav-item">
               <NavLink
@@ -139,7 +138,34 @@ const Menu = ({ history }) => {
               </NavLink>
             </li>
           )}
-
+          {isAutheticated().user.role === 2 && (
+            <li className="nav-item">
+              <NavLink
+                activeClassName="nav-link-active"
+                className="nav-link"
+                to="/guide/dashboard"
+                style={currentTab(history, "/guide/dashboard")}
+              >
+                <span className="text-light" style={{ fontSize: "18px" }}>
+                  DASHBOARD
+                </span>
+              </NavLink>
+            </li>
+          )}
+          {isAutheticated().user.role === 2 && (
+            <li className="nav-item">
+              <NavLink
+                activeClassName="nav-link-active"
+                className="nav-link"
+                to="/guide/pricing"
+                style={currentTab(history, "/guide/pricing")}
+              >
+                <span className="text-light" style={{ fontSize: "18px" }}>
+                  CHANGE PRICING
+                </span>
+              </NavLink>
+            </li>
+          )}
           <li className="nav-item">
             <span
               className="nav-link"

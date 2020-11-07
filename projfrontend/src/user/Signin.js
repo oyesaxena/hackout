@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Base from "../core/Base";
 import { Link, Redirect } from "react-router-dom";
 import { signin, authenticate, isAutheticated } from "../auth/helper";
-import loginWelcomeImage from "../images/home-welcome-image-cut.png";
+import loginWelcomeImage from "../images/home-welcome-image.png";
 import "./signin.css";
 
 const Signin = () => {
@@ -50,8 +50,8 @@ const Signin = () => {
     return (
       <Base>
         <section className="landing-section">
-          <div className="welcome-board">
-            <h1>Login To CrossFarm</h1>
+          <div className="login-welcome-board">
+            <h1>Login To AroundMe</h1>
             <div className="login-form-container">
               <img
                 className="login-form-image"

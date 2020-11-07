@@ -105,6 +105,7 @@ function SellerStock() {
                 id="type"
                 onChange={(e) => setProductName(e.target.value)}
                 value={productName}
+                className="form-control"
               >
                 <option value="">Select an Option</option>
                 <option value="Small Wooden Handicrafts">
@@ -130,6 +131,7 @@ function SellerStock() {
                 id="type"
                 onChange={(e) => setLocation(e.target.value)}
                 value={location}
+                className="form-control"
               >
                 <option value="">Select an Option</option>
                 <option value="Bihar">Bihar</option>
@@ -170,9 +172,11 @@ function SellerStock() {
                 />
               </div>
             )}
-            <button type="submit" className="btn btn-warning btn-block">
-              Submit
-            </button>
+            {isAutheticated().user.role === 1 && (
+              <button type="submit" className="btn btn-warning btn-block">
+                Submit
+              </button>
+            )}
           </form>
         </div>
       </div>

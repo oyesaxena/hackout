@@ -4,8 +4,6 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 import Home from "./core/Home";
 import Signup from "./user/Signup";
-import GuideStock from "./user/guideStock";
-import SellerStock from "./user/sellerStock";
 import Signin from "./user/Signin";
 // import AWS from "./user/AWS";
 import PrivateRoute from "./auth/helper/PrivateRoutes";
@@ -70,9 +68,13 @@ const Routes = () => {
         <GuideRoute path="/guide/dashboard" exact component={GuideDashboard} />
         <GuideRoute path="/guide/editPlaces" exact component={GuideStock} />
         <PrivateRoute path="/user/dashboard" exact component={Dashboard} />
-        <PrivateRoute path="/user" exact component={Dashboard} />
-        <PrivateRoute path="/user/images" exact component={UserDashBoard} />
         <PrivateRoute path="/user/selected" exact component={Selectedphotos} />
+        <PrivateRoute
+          path="/user/sellerpricing"
+          exact
+          component={SellerStock}
+        />
+        <PrivateRoute path="/user/guidepricing" exact component={GuideStock} />
         <PrivateRoute path="/farmerImages/:userId" exact component={Photos} />
 
         <SellerRoute
@@ -80,7 +82,8 @@ const Routes = () => {
           exact
           component={AdminDashBoard}
         />
-        {/* <GuideRoute path="/guide/dashboard" exact component={AdminDashBoard} /> */}
+        <GuideRoute path="/guide/dashboard" exact component={AdminDashBoard} />
+        <GuideRoute path="/guide/pricing" exact component={GuideStock} />
         <SellerRoute
           path="/userSelectedSellerImages/:userId"
           exact
