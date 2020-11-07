@@ -143,7 +143,7 @@ app.get("/getUsers", async (req, res) => {
     });
 });
 
-app.get("/getFarmers", async (req, res) => {
+app.get("/getAdmins", async (req, res) => {
   await User.find({ role: [1, 2] }, { images: 0, rates: 0 })
     .then((data) => {
       res.json(data);
@@ -210,7 +210,16 @@ app.post("/deleteUser", async (req, res) => {
 app.get("/selectedImages/:userId", async (req, res) => {
   await User.findOne(
     { _id: req.params.userId },
-    { images: 0, videos: 0, selectedImages: { $slice: [0, 8] } }
+    { images: 0, videos: 0, selectedImagesSellers: { $slice: [0, 8] } }
+  )
+    .then((user) => res.json(user))
+    .catch((err) => res.status(400).json("Error" + err));
+});
+
+app.get("/selectedImagesTourists/:userId", async (req, res) => {
+  await User.findOne(
+    { _id: req.params.userId },
+    { images: 0, videos: 0, selectedPlaces: { $slice: [0, 8] } }
   )
     .then((user) => res.json(user))
     .catch((err) => res.status(400).json("Error" + err));

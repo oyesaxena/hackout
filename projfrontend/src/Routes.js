@@ -15,14 +15,14 @@ import Dashboard from "./user/userDashboard";
 import UserDashBoard from "./user/Photos";
 import Selectedphotos from "./user/Selected";
 import AdminDashBoard from "./admin/AdminDashBoard";
+import GuideDashboard from "./user/guideDashboard";
 import UserSelectedImages from "./admin/UserSelectedImages";
 import UserSelectedImagesTourists from "./admin/userSelectedImagesTourists";
 import userEdit from "./admin/userEdit";
 import AddMoreImages from "./admin/addMoreImages";
 import { signin, isAutheticated } from "./auth/helper";
 import Photos from "./user/Photos";
-import GuideStock from "./user/guideStock";
-import SellerStock from "./user/sellerStock";
+
 // import { signup } from "../../controllers/auth";
 // import { signin } from "./auth/helper";
 const Routes = () => {
@@ -68,7 +68,7 @@ const Routes = () => {
 
         <Route path="/test" exact component={SellerStock} />
 
-        {/* <GuideRoute path="/guide/dashboard" exact component={GuideDashboard} /> */}
+        <GuideRoute path="/guide/dashboard" exact component={GuideDashboard} />
 
         <PrivateRoute path="/user/dashboard" exact component={Dashboard} />
         <PrivateRoute path="/user" exact component={Dashboard} />
@@ -81,7 +81,7 @@ const Routes = () => {
           exact
           component={AdminDashBoard}
         />
-        <GuideRoute path="/guide/dashboard" exact component={AdminDashBoard} />
+        {/* <GuideRoute path="/guide/dashboard" exact component={AdminDashBoard} /> */}
         <SellerRoute
           path="/userSelectedImages/:userId"
           exact

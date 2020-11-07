@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, withRouter, NavLink } from "react-router-dom";
 import { signout, isAutheticated } from "../auth/helper";
-import "./MenuMin.css";
+import "./menu.css";
 
 const currentTab = (history, path) => {
   if (history.location.pathname === path) {
