@@ -10,8 +10,13 @@
   /* justify-content: stretch; */
 }
 
+.login-welcome-board {
+  width: 60%;
+  text-align: center;
+}
+
 .form-right {
-  width: 50%;
+  flex-grow: 1;
   height: 500px;
 
   display: flex;
@@ -74,5 +79,5 @@
 }
 
 .login-form-image {
-  width: 50%;
+  width: 60%;
 }
