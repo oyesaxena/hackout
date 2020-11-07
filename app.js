@@ -159,6 +159,8 @@ app.post("/removeSelectedSellerImage/:userId", async (req, res) => {
     {
       $pull: {
         selectedSellerImages: req.body.selectedImage,
+        selectedSellerRates: req.body.rate,
+        selectedProductNames: req.body.productName,
       },
     }
   )
@@ -238,6 +240,8 @@ app.post("/selectSellerImage/:userId", async (req, res) => {
     {
       $push: {
         selectedSellerImages: req.body.selectedImage,
+        selectedSellerRates: req.body.rate,
+        selectedProductNames: req.body.productName,
       },
       $inc: {
         selectedImagesCount: 1,
@@ -319,36 +323,26 @@ app.post("/signUp", upload.array("imgCollection", 100), async (req, res) => {
   });
 });
 
-app.post(
-  "/uploadGuideStock/:userId",
-  upload.array("imgCollection", 1000),
-  async (req, res) => {
-    const reqFiles = [];
-    for (let i = 0; i < req.files.length; i++) {
-      reqFiles.push(req.files[i]);
+app.post("/uploadGuideStock/:userId", async (req, res) => {
+  console.log(req.params.userId);
+  await User.findOneAndUpdate(
+    { _id: req.params.userId },
+    {
+      touristRate: req.body.rate,
+      touristHour: req.body.hours,
+      touristLocation: req.body.place,
+    },
+    {
+      new: true,
     }
-    await User.findOneAndUpdate(
-      { _id: req.params.userId },
-      {
-        $push: {
-          images: reqFiles,
-          rates: req.body.rate,
-          hours: req.body.productName,
-          locations: req.body.location,
-        },
-        $inc: {
-          imagesCount: 1,
-        },
-      }
-    )
-      .then(() => {
-        console.log("User Updated");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-);
+  )
+    .then(() => {
+      console.log("User Updated");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 app.post(
   "/upload/:userId",
@@ -362,7 +356,7 @@ app.post(
       { _id: req.params.userId },
       {
         $push: {
-          selectedImagesSellers: reqFiles,
+          images: reqFiles,
           rates: req.body.rate,
           productNames: req.body.productName,
           locations: req.body.location,
