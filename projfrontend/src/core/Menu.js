@@ -59,7 +59,7 @@ const Menu = ({ history }) => {
                 activeClassName="nav-link-active"
                 className="nav-link"
                 to="/user/sellerpricing"
-                style={currentTab(history, "/sellerpricing")}
+                style={currentTab(history, "/user/sellerpricing")}
               >
                 <span className="text-light" style={{ fontSize: "18px" }}>
                   SELLER PRICING
@@ -129,7 +129,7 @@ const Menu = ({ history }) => {
               <NavLink
                 activeClassName="nav-link-active"
                 className="nav-link"
-                to="/admin/addstock"
+                to="/seller/addstock"
                 style={currentTab(history, "/admin/addstock")}
               >
                 <span className="text-light" style={{ fontSize: "18px" }}>

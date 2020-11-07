@@ -102,8 +102,11 @@ class AdminDashboard extends Component {
         <th scope="col">{user.status}</th>
         <th scope="col">{user.updatedAt.slice(0, 10)}</th>
         <th scope="col">
-          <Link to={"/userSelectedImages/" + user._id} className="text-warning">
-            Selected Images
+          <Link
+            to={"/userSelectedSellerImages/" + user._id}
+            className="text-warning"
+          >
+            Selected Products
           </Link>
         </th>
         {/* <th scope="col">

@@ -52,7 +52,8 @@ class Selected extends Component {
   getUserImages = () => {
     axios
       .get(
-        "http://localhost:8000/selectedImages/" + this.props.match.params.userId
+        "http://localhost:8000/selectedSellerImages/" +
+          this.props.match.params.userId
       )
       .then((response) => {
         console.log(response.data);
@@ -60,7 +61,7 @@ class Selected extends Component {
         this.setState({ images: data, loading: false });
         this.setState({
           pageCount: Math.ceil(
-            this.state.images.selectedImages.length / this.state.postsPerPage
+            this.state.images.imagesCount.length / this.state.postsPerPage
           ),
         });
         console.log(this.state.pageCount);
@@ -73,30 +74,31 @@ class Selected extends Component {
       });
   };
 
-  select = (imageLocation) => {
-    console.log("clicked");
-    console.log(imageLocation);
-    this.setState({
-      status: "Removed",
-      status2: "Image is removed!! Please reload the page",
-    });
-    this.setState({ selectedImage: imageLocation }, () => {
-      console.log("selected Image--", this.state.selectedImage);
-      const userData = JSON.parse(localStorage.jwt);
+  // select = (imageLocation) => {
+  //   console.log("clicked");
+  //   console.log(imageLocation);
+  //   this.setState({
+  //     status: "Removed",
+  //     status2: "Image is removed!! Please reload the page",
+  //   });
+  //   this.setState({ selectedImage: imageLocation }, () => {
+  //     console.log("selected Image--", this.state.selectedImage);
+  //     const userData = JSON.parse(localStorage.jwt);
 
-      axios
-        .post(
-          "http://localhost:8000/removeSelectedImage/" + userData.user._id,
-          {
-            selectedImage: this.state.selectedImage,
-            userId: userData.user._id,
-          }
-        )
-        .then((res) => {
-          console.log(res.data);
-        });
-    });
-  };
+  //     axios
+  //       .post(
+  //         "http://localhost:8000/removeSelectedSellerImage/" +
+  //           userData.user._id,
+  //         {
+  //           selectedImage: this.state.selectedImage,
+  //           userId: userData.user._id,
+  //         }
+  //       )
+  //       .then((res) => {
+  //         console.log(res.data);
+  //       });
+  //   });
+  // };
 
   renderModal = () => {
     if (this.state.selectedPost !== null) {
@@ -127,22 +129,24 @@ class Selected extends Component {
   };
 
   download = (imageData) => {
-    const { selectedImages = [] } = imageData;
+    const { selectedSellerImages = [] } = imageData;
 
-    return selectedImages.map((image, index) => window.open(image.location));
+    return selectedSellerImages.map((image, index) =>
+      window.open(image.location)
+    );
   };
 
   displayImages = (imageData) => {
     const { selectedPost } = this.state;
-    const { selectedImages = [] } = imageData;
-    const currentPosts = selectedImages.slice(
+    const { selectedSellerImages = [] } = imageData;
+    const currentPosts = selectedSellerImages.slice(
       this.state.offset,
       this.state.offset + this.state.postsPerPage
     );
     console.log(currentPosts);
     console.log(imageData);
-    console.log(selectedImages);
-    if (!selectedImages.length) return null;
+    console.log(selectedSellerImages);
+    if (!selectedSellerImages.length) return null;
 
     return currentPosts.map((image, index) => (
       <div key={index} className=".col-sm-4">

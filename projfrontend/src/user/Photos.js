@@ -122,7 +122,7 @@ class Photos extends Component {
       const userData = JSON.parse(localStorage.jwt);
 
       axios
-        .post("http://localhost:8000/selectImage/" + userData.user._id, {
+        .post("http://localhost:8000/selectSellerImage/" + userData.user._id, {
           selectedImage: this.state.selectedImage,
           userId: userData.user._id,
         })
@@ -194,7 +194,12 @@ class Photos extends Component {
     const indexOfFirstPost = indexOfLastPost - this.state.postsPerPage;
 
     const { selectedPost } = this.state;
-    const { images = [], rates = [], types = [], quality = [] } = imageData;
+    const {
+      images = [],
+      rates = [],
+      productNames = [],
+      locations = [],
+    } = imageData;
     console.log(rates);
     if (!images.length) return null;
 
@@ -224,9 +229,9 @@ class Photos extends Component {
             </tr>
           </thead>
           <tr>
-            <th scope="col">{types[index]}</th>
+            <th scope="col">{productNames[index]}</th>
             <th scope="col">{rates[index]}</th>
-            <th scope="col">{quality[index]}</th>
+            <th scope="col">{locations[index]}</th>
           </tr>
         </table>
 

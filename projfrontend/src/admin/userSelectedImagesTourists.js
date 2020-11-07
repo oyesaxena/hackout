@@ -52,7 +52,8 @@ class Selected extends Component {
   getUserImages = () => {
     axios
       .get(
-        "http://localhost:8000/selectedImages/" + this.props.match.params.userId
+        "http://localhost:8000/selectedImagesTourists/" +
+          this.props.match.params.userId
       )
       .then((response) => {
         console.log(response.data);

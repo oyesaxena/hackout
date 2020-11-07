@@ -53,7 +53,7 @@ class Selected extends Component {
     console.log(this.state.postsPerPage);
     const userData = JSON.parse(localStorage.jwt);
     axios
-      .post("http://localhost:8000/selectedImages/" + userData.user._id, {
+      .post("http://localhost:8000/selectedSellerImages/" + userData.user._id, {
         userId: userData.user._id,
         offset: this.state.offset,
       })
@@ -77,7 +77,7 @@ class Selected extends Component {
   getUserImages = () => {
     const userData = JSON.parse(localStorage.jwt);
     axios
-      .get("http://localhost:8000/selectedImages/" + userData.user._id)
+      .get("http://localhost:8000/selectedSellerImages/" + userData.user._id)
       .then((response) => {
         console.log(response.data);
         const data = response.data;
@@ -111,7 +111,8 @@ class Selected extends Component {
 
       axios
         .post(
-          "http://localhost:8000/removeSelectedImage/" + userData.user._id,
+          "http://localhost:8000/removeSelectedSellerImage/" +
+            userData.user._id,
           {
             selectedImage: this.state.selectedImage,
             userId: userData.user._id,
@@ -153,17 +154,17 @@ class Selected extends Component {
 
   displayImages = (imageData) => {
     const { selectedPost } = this.state;
-    const { selectedImages = [] } = imageData;
-    const currentPosts = selectedImages.slice(
+    const { selectedSellerImages = [] } = imageData;
+    const currentPosts = selectedSellerImages.slice(
       this.state.offset,
       this.state.offset + this.state.postsPerPage
     );
     console.log(currentPosts);
     console.log(imageData);
-    console.log(selectedImages);
-    if (!selectedImages.length) return null;
+    console.log(selectedSellerImages);
+    if (!selectedSellerImages.length) return null;
 
-    return selectedImages.map((image, index) => (
+    return selectedSellerImages.map((image, index) => (
       <div key={index} className=".col-sm-4">
         <img
           className="small rounded imageBorder"

@@ -13,14 +13,14 @@ import Dashboard from "./user/userDashboard";
 import UserDashBoard from "./user/Photos";
 import Selectedphotos from "./user/Selected";
 import AdminDashBoard from "./admin/AdminDashBoard";
+import GuideDashboard from "./user/guideDashboard";
 import UserSelectedImages from "./admin/UserSelectedImages";
 import UserSelectedImagesTourists from "./admin/userSelectedImagesTourists";
 import userEdit from "./admin/userEdit";
 import AddMoreImages from "./admin/addMoreImages";
 import { signin, isAutheticated } from "./auth/helper";
 import Photos from "./user/Photos";
-import GuideStock from "./user/guideStock";
-import SellerStock from "./user/sellerStock";
+
 // import { signup } from "../../controllers/auth";
 // import { signin } from "./auth/helper";
 const Routes = () => {
@@ -64,6 +64,10 @@ const Routes = () => {
         <Route path="/signUp" exact component={Signup} />
         <Route path="/signin" exact component={Signin} />
 
+        {/* <Route path="/test" exact component={SellerStock} /> */}
+
+        <GuideRoute path="/guide/dashboard" exact component={GuideDashboard} />
+
         <PrivateRoute path="/user/dashboard" exact component={Dashboard} />
         <PrivateRoute path="/user/selected" exact component={Selectedphotos} />
         <PrivateRoute
@@ -82,7 +86,7 @@ const Routes = () => {
         <GuideRoute path="/guide/dashboard" exact component={AdminDashBoard} />
         <GuideRoute path="/guide/pricing" exact component={GuideStock} />
         <SellerRoute
-          path="/userSelectedImages/:userId"
+          path="/userSelectedSellerImages/:userId"
           exact
           component={UserSelectedImages}
         />
@@ -91,13 +95,14 @@ const Routes = () => {
           exact
           component={UserSelectedImagesTourists}
         />
-        <Route path="/farmerImages/:userId" exact component={Photos} />
+        <Route path="/sellerImages/:userId" exact component={Photos} />
         <SellerRoute path="/userEdit/:userId" exact component={userEdit} />
         <SellerRoute
           path="/userAddImages/:userId"
           exact
           component={AddMoreImages}
         />
+        <SellerRoute path="/seller/addStock" exact component={SellerStock} />
       </Switch>
     </BrowserRouter>
   );

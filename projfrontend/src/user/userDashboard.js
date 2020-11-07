@@ -49,7 +49,7 @@ class AdminDashboard extends Component {
 
   getUsers = () => {
     axios
-      .get("http://localhost:8000/getFarmers/")
+      .get("http://localhost:8000/getAdmins/")
       .then((response) => {
         console.log(response.data);
         const data = response.data;
@@ -66,7 +66,7 @@ class AdminDashboard extends Component {
 
   displayUsers = (users) => {
     let filterUsers = users.filter((user) => {
-      return user.name.toLowerCase().indexOf(this.state.search) !== -1;
+      return user.status.toLowerCase().indexOf(this.state.search) !== -1;
     });
 
     return filterUsers.map((user, index) => (
@@ -77,7 +77,12 @@ class AdminDashboard extends Component {
         <th scope="col">{user.status}</th>
         <th scope="col">{user.updatedAt.slice(0, 10)}</th>
         <th scope="col">
-          <Link to={"/farmerImages/" + user._id} className="text-warning">
+          <Link
+            to={
+              (user.role === 1 ? "/sellerImages/" : "/guideStock/") + user._id
+            }
+            className="text-warning"
+          >
             Stock and Prices
           </Link>
         </th>
