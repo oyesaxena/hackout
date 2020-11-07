@@ -12,8 +12,10 @@ import GuideRoute from "./auth/helper/GuideRoutes";
 import SellerStock from "./user/sellerStock";
 import GuideStock from "./user/guideStock";
 import Dashboard from "./user/userDashboard";
+import UserSelectedGuides from "./user/userSelectedGuides";
 import UserDashBoard from "./user/Photos";
 import Selectedphotos from "./user/Selected";
+import SelectedGuidesphotos from "./user/selectedGuides";
 import AdminDashBoard from "./admin/AdminDashBoard";
 import GuideDashboard from "./user/guideDashboard";
 import UserSelectedImages from "./admin/UserSelectedImages";
@@ -71,6 +73,11 @@ const Routes = () => {
         <PrivateRoute path="/user/dashboard" exact component={Dashboard} />
         <PrivateRoute path="/user/selected" exact component={Selectedphotos} />
         <PrivateRoute
+          path="/user/selectedGuides"
+          exact
+          component={SelectedGuidesphotos}
+        />
+        <PrivateRoute
           path="/user/sellerpricing"
           exact
           component={SellerStock}
@@ -78,7 +85,11 @@ const Routes = () => {
         <PrivateRoute path="/user/guidepricing" exact component={GuideStock} />
         <PrivateRoute path="/sellerImages/:userId" exact component={Photos} />
         <PrivateRoute path="/user/history/" exact component={History} />
-
+        <GuideRoute
+          path="/userSelectedGuides/:userId"
+          exact
+          component={UserSelectedGuides}
+        />
         <GuideRoute path="/guide/dashboard" exact component={GuideDashboard} />
         <GuideRoute path="/guide/pricing" exact component={GuideStock} />
         <GuideRoute

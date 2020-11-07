@@ -87,7 +87,7 @@ app.post("/bookGuide/:userId", async (req, res) => {
         selectedGuides: {
           name: req.body.name,
           time: req.body.hour,
-          locations: req.body.location,
+          location: req.body.location,
           price: req.body.rate,
         },
       },
@@ -224,6 +224,25 @@ app.post("/removeSelectedSellerImage/:userId", async (req, res) => {
         selectedSellerImages: req.body.selectedImage,
         selectedSellerRates: req.body.rate,
         selectedProductNames: req.body.productName,
+      },
+    }
+  )
+    .then(() => {
+      console.log("Images removed");
+    })
+    .catch((err) => {
+      console.log("Error -- ", err);
+    });
+});
+
+app.post("/removeSelectedGuide/:userId", async (req, res) => {
+  await User.findOneAndUpdate(
+    { _id: req.body.userId },
+    {
+      $pull: {
+        selectedGuides: {
+          name: req.body.name,
+        },
       },
     }
   )

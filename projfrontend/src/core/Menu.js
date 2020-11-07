@@ -58,6 +58,20 @@ const Menu = ({ history }) => {
               <NavLink
                 activeClassName="nav-link-active"
                 className="nav-link"
+                to="/user/selectedGuides"
+                style={currentTab(history, "/user/dashboard")}
+              >
+                <span className="text-light" style={{ fontSize: "18px" }}>
+                  SELECTED GUIDES
+                </span>
+              </NavLink>
+            </li>
+          )}
+          {isAutheticated().user.role === 0 && (
+            <li className="nav-item">
+              <NavLink
+                activeClassName="nav-link-active"
+                className="nav-link"
                 to="/user/history"
                 style={currentTab(history, "/user/history")}
               >
