@@ -5,3 +5,4 @@ And one of the primary concern about conserving and preserving our local heritag
 
 
 If all these problems actually bug you, we bring to you AroundMe, an all in one web based solution for tourists, local vendors and tourist guides
+![](img/prev.jpg)
