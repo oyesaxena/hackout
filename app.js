@@ -78,6 +78,25 @@ app.get("/userImages/:userId", async (req, res) => {
     .catch((err) => res.status(400).json("Error" + err));
 });
 
+app.post("/bookGuide/:userId", async (req, res) => {
+  console.log(req.body.name);
+  await User.findOneAndUpdate(
+    { _id: req.params.userId },
+    {
+      $push: {
+        selectedGuides: {
+          name: req.body.name,
+          time: req.body.hour,
+          locations: req.body.location,
+          price: req.body.rate,
+        },
+      },
+    }
+  )
+    .then(() => console.log("Guide added"))
+    .catch((err) => console.log(err));
+});
+
 app.post("/addHistory/:userId", async (req, res) => {
   const newHistory = new History({
     name: req.body.name,
