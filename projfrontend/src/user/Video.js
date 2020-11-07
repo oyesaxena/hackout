@@ -2,18 +2,17 @@ import React, { Component } from "react";
 import Base from "../core/Base";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from "react-paginate";
 import "./Pagination.css";
-import "../core/Homemin.css"
 
 import { Button, Modal, ModalBody, Row, Col, Container } from "reactstrap";
 class Videos extends Component {
   state = {
     images: [],
-    bool:[],
+    bool: [],
     loading: true,
     selectedImage: "",
-    selectedTitle:"",
+    selectedTitle: "",
     selectedPost: null,
     status: "Add to wishlist",
     status2: "",
@@ -21,7 +20,7 @@ class Videos extends Component {
     modal: false,
     currentPage: 1,
     postsPerPage: 8,
-    pageCount:0
+    pageCount: 0,
     // showResults:false
   };
 
@@ -59,12 +58,13 @@ class Videos extends Component {
         console.log(response.data);
         const data = response.data;
         this.setState({ images: data, loading: false });
-        console.log(this.state.images)
+        console.log(this.state.images);
         this.setState({
-          pageCount: Math.ceil(this.state.images.images.length / this.state.postsPerPage),
-    
+          pageCount: Math.ceil(
+            this.state.images.images.length / this.state.postsPerPage
+          ),
         });
-        console.log(this.state.pageCount)
+        console.log(this.state.pageCount);
         console.log("Data has been received!!");
       })
       .catch((err) => {
@@ -73,8 +73,6 @@ class Videos extends Component {
         this.setState({ loading: false });
       });
   };
-
- 
 
   renderModal = () => {
     if (this.state.selectedPost !== null) {
@@ -116,7 +114,7 @@ class Videos extends Component {
     );
   };
 
-  handlePageClick = e => {
+  handlePageClick = (e) => {
     const selectedPage = e.selected;
     console.log(selectedPage);
     const offset = selectedPage * this.state.postsPerPage;
@@ -124,7 +122,7 @@ class Videos extends Component {
     this.setState(
       {
         currentPage: selectedPage,
-        offset: offset
+        offset: offset,
       },
       () => {
         this.getUserImages();
@@ -135,64 +133,62 @@ class Videos extends Component {
   displayImages = (imageData) => {
     const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
     const indexOfFirstPost = indexOfLastPost - this.state.postsPerPage;
-    
+
     const { selectedPost } = this.state;
     const { videos = [] } = imageData;
-    const currentPosts = videos.slice(this.state.offset,
-      this.state.offset + this.state.postsPerPage);
+    const currentPosts = videos.slice(
+      this.state.offset,
+      this.state.offset + this.state.postsPerPage
+    );
     console.log(currentPosts);
     if (!videos.length) return null;
 
     return currentPosts.map((video, index) => (
-        
       <div key={index} className=".col-sm-4">
-        <iframe width="500px" height="315px"  style={{margin:"20px"}}
-                src={"//www.youtube.com/embed/"+video} 
-                frameBorder="20"
-                allowFullScreen
-                
-                ></iframe>
-                
-        
-        {/* <Button id={image.location} style={{alignContent:"center",marginLeft:"100px",marginTop:"20px",marginBottom:"10px"}} value={image.location} onClick={this.select} className="bg-warning text-dark">{this.state.status}</Button> */}
+        <iframe
+          width="500px"
+          height="315px"
+          style={{ margin: "20px" }}
+          src={"//www.youtube.com/embed/" + video}
+          frameBorder="20"
+          allowFullScreen
+        ></iframe>
 
-        
+        {/* <Button id={image.location} style={{alignContent:"center",marginLeft:"100px",marginTop:"20px",marginBottom:"10px"}} value={image.location} onClick={this.select} className="bg-warning text-dark">{this.state.status}</Button> */}
       </div>
     ));
   };
 
   render() {
     const { loading, images } = this.state;
-    
+
     if (loading) {
       return <h2>Loading...</h2>;
     }
     console.log(this.state.images);
-    
+
     console.log(this.state.postsPerPage);
 
     return (
       <Base title="user Dashboard Page">
         <h1>This is photos page</h1>
 
-        <div className="row">
-          {this.displayImages(this.state.images)}
-        </div>
-        
+        <div className="row">{this.displayImages(this.state.images)}</div>
+
         <ReactPaginate
-                    previousLabel={"prev"}
-                    nextLabel={"next"}
-                    breakLabel={"..."}
-                    breakClassName={"break-me"}
-                    pageCount={this.state.pageCount}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={this.handlePageClick}
-                    containerClassName={"pagination"}
-                    subContainerClassName={"pages pagination"}
-                    activeClassName={"active"}/>
-        
-        </Base>
+          previousLabel={"prev"}
+          nextLabel={"next"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={this.state.pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={this.handlePageClick}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"}
+        />
+      </Base>
     );
   }
 }
