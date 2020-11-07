@@ -64,8 +64,8 @@ exports.signin = (req, res) => {
 
     //send respone to frontend
 
-    const { _id, name, email, role, title, status } = user;
-    return res.json({ token, user: { _id, name, email, role } });
+    const { _id, name, email, role, history } = user;
+    return res.json({ token, user: { _id, name, email, role, history } });
   });
 };
 

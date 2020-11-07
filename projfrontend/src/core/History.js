@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { isAutheticated } from "../auth/helper";
 import Base from "./Base";
@@ -12,6 +12,22 @@ function History() {
   const [hours, setHours] = useState("");
   const [profit, setProfit] = useState("");
   const [filterUsers, setFilterUser] = useState([]);
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.jwt);
+    const historyUsers = [];
+    userData.user["history"].forEach((obj) => {
+      historyUsers.push({
+        name: obj.name,
+        userType: obj.status,
+        productName: obj.productName,
+        location: obj.location,
+        hours: obj.time,
+        profit: obj.price,
+      });
+    });
+    setFilterUser(historyUsers);
+  }, []);
 
   function addUsers() {
     setFilterUser((users) => [
@@ -28,18 +44,14 @@ function History() {
 
     const userData = JSON.parse(localStorage.jwt);
 
-    axios
-      .post("http://localhost:8000/addHistory/" + userData.user._id, {
-        name: name,
-        status: userType,
-        location: location,
-        time: hours,
-        productName: productName,
-        price: profit,
-      })
-      .then(() => {
-        window.location.reload(false);
-      });
+    axios.post("http://localhost:8000/addHistory/" + userData.user._id, {
+      name: name,
+      status: userType,
+      location: location,
+      time: hours,
+      productName: productName,
+      price: profit,
+    });
 
     setName("");
     setUserType("0");
@@ -47,25 +59,6 @@ function History() {
     setLocation("");
     setHours("");
     setProfit("");
-  }
-
-  function getUsers() {
-    const userData = JSON.parse(localStorage.jwt);
-
-    axios
-      .get("http://localhost:8000/getHistory/" + userData.user._id)
-      .then((response) => {
-        console.log(response.data);
-        const data = response.data;
-        this.setState({ users: data, loading: false });
-        console.log(this.state.users);
-        console.log("Data has been received!!");
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Error retrieving data!!!");
-        this.setState({ loading: false });
-      });
   }
 
   function displayUsers(users) {
@@ -241,7 +234,7 @@ function History() {
                 <th scope="col">Price</th>
               </tr>
             </thead>
-            {displayUsers(filterUsers)}
+            <tbody>{displayUsers(filterUsers)}</tbody>
           </table>
         </div>
       </div>
