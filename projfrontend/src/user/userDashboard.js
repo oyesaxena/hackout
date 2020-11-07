@@ -100,31 +100,34 @@ class AdminDashboard extends Component {
         <th scope="col">{user.touristHour}</th>
         <th scope="col">{user.status}</th>
         <th scope="col">{user.updatedAt.slice(0, 10)}</th>
-        <th scope="col">
-          <Link
-            to={
-              (user.role === 1 ? "/sellerImages/" : "/guideStock/") + user._id
-            }
-            className="text-warning"
-          >
-            Stock and Prices
-          </Link>
-        </th>
-        <th scope="col">
-          <Link
-            onClick={() => {
-              this.bookGuide(
-                user.name,
-                user.touristHour,
-                user.touristLocation,
-                user.touristRate
-              );
-            }}
-            className="text-warning"
-          >
-            Book Guide
-          </Link>
-        </th>
+        {user.status === "Seller" ? (
+          <th scope="col">
+            <Link
+              to={
+                (user.role === 1 ? "/sellerImages/" : "/guideStock/") + user._id
+              }
+              className="text-warning"
+            >
+              Stock and Prices
+            </Link>
+          </th>
+        ) : (
+          <th scope="col">
+            <Link
+              onClick={() => {
+                this.bookGuide(
+                  user.name,
+                  user.touristHour,
+                  user.touristLocation,
+                  user.touristRate
+                );
+              }}
+              className="text-warning"
+            >
+              Book Guide
+            </Link>
+          </th>
+        )}
       </tr>
     ));
   };
