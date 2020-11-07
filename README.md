@@ -10,4 +10,4 @@
 If all these problems actually bug you, we bring to you **AroundMe**, an all in one web based solution for tourists, local vendors and tourist guides. A solution to ensure the fairness in finances from both the vendors point of view and the buyers point of view. And an assurance of having a fully fledged experience out of any places that one visits.
 
 
-![](img/prev.JPG)
+![](img/prev.jpg)
