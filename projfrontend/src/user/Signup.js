@@ -12,11 +12,8 @@ export default class FilesUploadComponent extends Component {
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
-    // this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeStatus = this.onChangeStatus.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    //     this.handleChange=this.handleChange.bind(this);
-    //    this.addVideo=this.addVideo.bind(this);
 
     this.state = {
       imgCollection: "",
@@ -30,18 +27,13 @@ export default class FilesUploadComponent extends Component {
     this.state = {
       password: "",
     };
-    // this.state = {
-    //   title: "",
-    // };
+
     this.state = {
       status: "",
     };
     this.state = {
       name: "",
     };
-    // this.state = {
-    //   videoCollection: [],
-    // };
   }
 
   onChangeName(e) {
@@ -55,24 +47,11 @@ export default class FilesUploadComponent extends Component {
   onChangePassword(e) {
     this.setState({ password: e.target.value });
   }
-  //   onChangeTitle(e) {
-  //     this.setState({ title: e.target.value });
-  //     console.log(e.target.value);
-  //   }
+
   onChangeStatus(e) {
     this.setState({ status: e.target.value });
     console.log(e.target.value);
   }
-
-  //   handleChange(e,index){
-  //     this.state.videoCollection[index]=e.target.value
-  //     this.setState({videoCollection:this.state.videoCollection})
-  //     console.log(this.state.videoCollection)
-  //   }
-
-  //   addVideo(){
-  //     this.setState({videoCollection:[...this.state.videoCollection, ""]})
-  //   }
 
   onFileChange(e) {
     this.setState({ imgCollection: e.target.files }, () => {
@@ -85,11 +64,8 @@ export default class FilesUploadComponent extends Component {
 
     var formData = new FormData();
     this.setState({ loading: true });
-    // console.log(formData);
-    // for (const key of Object.keys(this.state.videoCollection)){
-    //   formData.append("videoCollection",this.state.videoCollection[key])
-    // }
-    if (this.state.status === "Farmer") {
+
+    if (this.state.status === "Seller" || this.state.status === "Guide") {
       for (const key of Object.keys(this.state.imgCollection)) {
         formData.append("imgCollection", this.state.imgCollection[key]);
         console.log(this.state.imgCollection[key]);
@@ -167,19 +143,28 @@ export default class FilesUploadComponent extends Component {
                       <input
                         type="radio"
                         name="status"
-                        value="Farmer"
+                        value="Seller"
                         onChange={this.onChangeStatus}
                       />{" "}
-                      Farmer
+                      Local Seller
                     </div>
                     <div className="col-sm">
                       <input
                         type="radio"
                         name="status"
-                        value="Buyer"
+                        value="Tourist"
                         onChange={this.onChangeStatus}
                       />{" "}
-                      Buyer
+                      Tourist
+                    </div>
+                    <div className="col-sm">
+                      <input
+                        type="radio"
+                        name="status"
+                        value="Guide"
+                        onChange={this.onChangeStatus}
+                      />{" "}
+                      Tourist Guide
                     </div>
                   </div>
                 </div>
@@ -187,7 +172,10 @@ export default class FilesUploadComponent extends Component {
 
               <div className="form-group">
                 <label className="">Upload Photos</label>
-                <h3>Please upload documents of proof if you are a farmer</h3>
+                <h3>
+                  Please upload documents of proof if you are a
+                  shopkeeper/tourist guide !!!
+                </h3>
                 <br></br>
                 <div class="input-group">
                   <div>

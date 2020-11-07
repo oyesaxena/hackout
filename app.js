@@ -144,7 +144,7 @@ app.get("/getUsers", async (req, res) => {
 });
 
 app.get("/getFarmers", async (req, res) => {
-  await User.find({ role: 1 }, { images: 0, rates: 0 })
+  await User.find({ role: [1, 2] }, { images: 0, rates: 0 })
     .then((data) => {
       res.json(data);
     })
@@ -314,6 +314,37 @@ app.post("/signUp", upload.array("imgCollection", 100), async (req, res) => {
 });
 
 app.post(
+  "/uploadGuideStock/:userId",
+  upload.array("imgCollection", 1000),
+  async (req, res) => {
+    const reqFiles = [];
+    for (let i = 0; i < req.files.length; i++) {
+      reqFiles.push(req.files[i]);
+    }
+    await User.findOneAndUpdate(
+      { _id: req.params.userId },
+      {
+        $push: {
+          images: reqFiles,
+          rates: req.body.rate,
+          hours: req.body.productName,
+          locations: req.body.location,
+        },
+        $inc: {
+          imagesCount: 1,
+        },
+      }
+    )
+      .then(() => {
+        console.log("User Updated");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+);
+
+app.post(
   "/upload/:userId",
   upload.array("imgCollection", 1000),
   async (req, res) => {
@@ -327,8 +358,8 @@ app.post(
         $push: {
           images: reqFiles,
           rates: req.body.rate,
-          types: req.body.type,
-          quality: req.body.quality,
+          productNames: req.body.productName,
+          locations: req.body.location,
         },
         $inc: {
           imagesCount: 1,
@@ -341,26 +372,6 @@ app.post(
       .catch((err) => {
         console.log(err);
       });
-
-    // const newUser = new User({
-    //   name: req.body.name,
-    //   email: req.body.email,
-    //   password: req.body.password,
-    //   title: req.body.title,
-    //   status: req.body.status,
-    //   images: reqFiles,
-    //   videos: req.body.videoCollection,
-    //   imagesCount:reqFiles.length
-    // });
-    // newUser.save((err) => {
-    //   if (err) {
-    //     console.log(err);
-    //     res.send("Use different email address");
-    //   } else {
-    //     console.log("user created");
-    //     res.send("User Created");
-    //   }
-    // });
   }
 );
 
