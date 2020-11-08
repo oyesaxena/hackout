@@ -327,8 +327,8 @@ class Photos extends Component {
     }
 
     return (
-      <div className="myDiv" tabIndex="0" ref="myDiv">
-        <Base title="user Dashboard Page">
+      <Base>
+        <div className="container">
           <h1>Stocks and Prices of {this.state.images.name}</h1>
 
           <div className="row">
@@ -353,8 +353,8 @@ class Photos extends Component {
             subContainerClassName={"pages pagination"}
             activeClassName={"active"}
           />
-        </Base>
-      </div>
+        </div>
+      </Base>
     );
   }
 }
