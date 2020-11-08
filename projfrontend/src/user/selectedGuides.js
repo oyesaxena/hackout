@@ -187,7 +187,7 @@ class SelectedGuides extends Component {
               <th scope="col">Price</th>
               <th scope="col">Location</th>
               <th scope="col">Time</th>
-              {/* <th scope="col">Quality</th> */}
+              <th scope="col"></th>
             </tr>
           </thead>
           <tr>
@@ -236,26 +236,26 @@ class SelectedGuides extends Component {
     }
     console.log(this.state.images);
     return (
-      <Base title="user Dashboard Page">
-        <h1>Your Cart</h1>
-        <div className="container">{this.displayImages(this.state.images)}</div>
-        <ReactPaginate
-          previousLabel={"prev"}
-          nextLabel={"next"}
-          breakLabel={"..."}
-          breakClassName={"break-me"}
-          pageCount={this.state.pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={this.handlePageClick}
-          containerClassName={"pagination"}
-          subContainerClassName={"pages pagination"}
-          activeClassName={"active"}
-        />
-        {/* <Modal open={this.state.modal} onClose={this.closeIt} center>
-          <h2>Simple centered modal</h2>
-          <div>{this.renderModal()}</div>
-        </Modal> */}
+      <Base>
+        <div className="container">
+          <h1>Your Cart</h1>
+          <div className="container">
+            {this.displayImages(this.state.images)}
+          </div>
+          <ReactPaginate
+            previousLabel={"prev"}
+            nextLabel={"next"}
+            breakLabel={"..."}
+            breakClassName={"break-me"}
+            pageCount={this.state.pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={this.handlePageClick}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}
+          />
+        </div>
       </Base>
     );
   }
