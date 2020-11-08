@@ -34,7 +34,7 @@ const data = [
     Chhattisgarh: 800,
     Rajasthan: 1000,
   },
-  { name: "Cane Mat", Meghalaya: 300, Chhattisgarh: 350, Rajasthan: 300 },
+  { name: "Cane Mat", Bihar: 300, Chhattisgarh: 350, Rajasthan: 300 },
 ];
 
 function SellerStock() {
@@ -231,8 +231,9 @@ function SellerStock() {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="pv" stackId="a" fill="#8884d8" />
-              <Bar dataKey="uv" stackId="a" fill="#82ca9d" />
+              <Bar dataKey="Bihar" stackId="a" fill="#8884d8" />
+              <Bar dataKey="Chhattisgarh" stackId="a" fill="#82ca9d" />
+              <Bar dataKey="Rajasthan" stackId="a" fill="#aaAD9d" />
             </BarChart>
           </ResponsiveContainer>
         </div>
